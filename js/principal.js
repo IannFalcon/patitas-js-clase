@@ -9,7 +9,9 @@ window.addEventListener('load', function() { // Funcion anonima
   mostrarAlerta(`¡Bienvenido: ${result.nombreUsuario}!`, mensajeAlerta);
 
   // Agregar evento al boton de cerrar sesion
-  btnCerrarSesion.addEventListener('click', cerrarSesion(btnCerrarSesion));
+  btnCerrarSesion.addEventListener('click', function() {
+    cerrarSesion(btnCerrarSesion);
+  }); 
 
 });
 
