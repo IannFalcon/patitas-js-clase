@@ -30,7 +30,7 @@ window.addEventListener('load', function() { // Funcion anonima
     ocultarAlerta();
 
     // Consumir action del MVC
-    autenticar();
+    autenticar(btnIniciarSesion);
 
   });
 
@@ -46,7 +46,7 @@ function ocultarAlerta() {
   mensajeAlerta.style.display = 'none';
 }
 
-async function autenticar() {
+async function autenticar(boton) {
   const url = 'http://localhost:8082/login/autenticar-async';
   const data = {
     tipoDocumento: tipoDocumento.value,
@@ -55,6 +55,8 @@ async function autenticar() {
   };
 
   try {
+
+    deshabilitarBoton(boton);
 
     const response = await fetch(url, {
       method: 'POST',
@@ -82,9 +84,12 @@ async function autenticar() {
       // replace: Reemplaza la URL actual por la URL especificada sin guardar la URL actual en el historial
       window.location.replace('principal.html'); // Redireccionar a la pagina principal
 
+      habilitarBoton(boton);
+
     } else {
 
       mostrarAlerta(result.mensaje);
+      habilitarBoton(boton);
 
     }
 
@@ -95,4 +100,12 @@ async function autenticar() {
 
   }
 
+}
+
+function deshabilitarBoton(boton) {
+  boton.disabled = true;
+}
+
+function habilitarBoton(boton) {
+  boton.disabled = false;
 }

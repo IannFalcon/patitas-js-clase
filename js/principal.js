@@ -9,7 +9,7 @@ window.addEventListener('load', function() { // Funcion anonima
   mostrarAlerta(`¡Bienvenido: ${result.nombreUsuario}!`, mensajeAlerta);
 
   // Agregar evento al boton de cerrar sesion
-  btnCerrarSesion.addEventListener('click', cerrarSesion);
+  btnCerrarSesion.addEventListener('click', cerrarSesion(btnCerrarSesion));
 
 });
 
@@ -18,14 +18,16 @@ function mostrarAlerta(mensaje, alerta) {
   alerta.style.display = 'block';
 }
 
-async function cerrarSesion() {
+async function cerrarSesion(boton) {
   const url = 'http://localhost:8082/login/cerrar-sesion-async';
-  const data ={
+  const data = {
     tipoDocumento: localStorage.getItem('tipoDocumento'),
     numeroDocumento: localStorage.getItem('numeroDocumento')
   };
 
   try {
+
+    deshabilitarBoton(boton);
 
     const response = await fetch(url, {
       method: 'POST',
@@ -50,9 +52,12 @@ async function cerrarSesion() {
       localStorage.removeItem('numeroDocumento');
       window.location.replace('index.html'); // Redireccionar al inicio
 
+      habilitarBoton(boton);
+
     } else {
 
       alert(result.mensaje);
+      habilitarBoton(boton);
 
     }
 
@@ -63,4 +68,12 @@ async function cerrarSesion() {
 
   }
 
+}
+
+function deshabilitarBoton(boton) {
+  boton.disabled = true;
+}
+
+function habilitarBoton(boton) {
+  boton.disabled = false;
 }
