@@ -76,6 +76,8 @@ async function autenticar() {
     if (result.codigo === '00') {
 
       localStorage.setItem('resultado', JSON.stringify(result)); // Almacenar en el localStorage
+      localStorage.setItem('tipoDocumento', tipoDocumento.value);
+      localStorage.setItem('numeroDocumento', numeroDocumento.value);
       // href : Devuelve la URL de la pagina actual o redirecciona a una nueva pagina
       // replace: Reemplaza la URL actual por la URL especificada sin guardar la URL actual en el historial
       window.location.replace('principal.html'); // Redireccionar a la pagina principal
