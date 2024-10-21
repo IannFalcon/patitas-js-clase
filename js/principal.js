@@ -21,7 +21,7 @@ function mostrarAlerta(mensaje, alerta) {
 }
 
 async function cerrarSesion(boton) {
-  const url = 'http://localhost:8082/login/cerrar-sesion-async';
+  const url = 'http://localhost:8082/logout/cerrar-sesion-feign';
   const data = {
     tipoDocumento: localStorage.getItem('tipoDocumento'),
     numeroDocumento: localStorage.getItem('numeroDocumento')
